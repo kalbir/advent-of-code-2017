@@ -20,5 +20,11 @@ defmodule Captcha do
    0 + consecutive_same(t)
   end
   
+  def complete(number) do
+   number
+     |> number_to_list
+     |> add_first_number_to_end
+     |> consecutive_same
+  end
 
 end

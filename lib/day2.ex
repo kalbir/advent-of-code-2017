@@ -10,6 +10,10 @@ defmodule Checksum do
     difference = max - min 
   end
 
+  def divisors(list) do
+    
+  end
+
   def process_file(file) do 
      file
        |> File.read!

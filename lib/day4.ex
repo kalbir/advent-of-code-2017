@@ -1,13 +1,13 @@
 defmodule Passphrase do
-
-  def validate(string) do
-      list_of_strings = break_on_space(string)
-      validation = compare_the_lists(list_of_strings, Enum.uniq(list_of_strings))
-  end
-
   def break_on_space(string) do
     string |>
       String.split
+  end
+
+  def process_file(file) do
+     file
+       |> File.read!
+       |> String.split(~r{\n}, parts: :infinity)
   end
 
   def compare_the_lists(list1, list2) do
@@ -17,10 +17,14 @@ defmodule Passphrase do
     end
   end
 
-  def process_file(file) do
-     file
-       |> File.read!
-       |> String.split(~r{\n}, parts: :infinity)
+  # This is all based around the idea that you have a list of strings e.g.
+  # ["abc", "def", "abc", "ghi"]. When you apply `Enum.uniq` to that list it will get rid of any duplicates
+  # in the list. So if you compare the original, with the result of applying
+  # `Enum.uniq`, if they are the same there are no duplicates, if they are different
+  # then there are duplicates (invalid passphrase).
+  def validate(string) do
+      list_of_strings = break_on_space(string)
+      validation = compare_the_lists(list_of_strings, Enum.uniq(list_of_strings))
   end
 
   def answer(file) do

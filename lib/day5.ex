@@ -29,7 +29,7 @@ defmodule Maze do
          new_list = change_the_list(list_of_numbers, position)
          new_position = position + nth_item
          new_position_string = Integer.to_string(new_position)
-         IO.puts(new_position_string)
+         # IO.puts(new_position_string)
          where_to_move(new_list, new_position, acc + 1)
      end
   end
